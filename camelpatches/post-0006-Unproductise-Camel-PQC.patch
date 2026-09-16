@@ -4,14 +4,13 @@ Date: Mon, 7 Sep 2026 09:43:36 +0200
 Subject: Unproductise Camel PQC
 
 ---
- .mvn/excludes.txt                                             | 1 +
- bom/camel-bom/pom.xml                                         | 2 +-
- catalog/camel-allcomponents/pom.xml                           | 2 +-
- components/camel-pqc/pom.xml                                  | 4 ++--
- components/pom.xml                                            | 2 +-
- parent/pom.xml                                                | 2 +-
- .../main/resources/required-productized-camel-artifacts.txt   | 1 -
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ .mvn/excludes.txt                   | 1 +
+ bom/camel-bom/pom.xml               | 2 +-
+ catalog/camel-allcomponents/pom.xml | 2 +-
+ components/camel-pqc/pom.xml        | 4 ++--
+ components/pom.xml                  | 2 +-
+ parent/pom.xml                      | 2 +-
+ 6 files changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/.mvn/excludes.txt b/.mvn/excludes.txt
 index d8a972538ff0..593f82d1ca04 100644
@@ -97,18 +96,6 @@ index 3ecd3a385154..4c3965ddfa1c 100644
              </dependency>
              <dependency>
                  <groupId>org.apache.camel</groupId>
-diff --git a/product/src/main/resources/required-productized-camel-artifacts.txt b/product/src/main/resources/required-productized-camel-artifacts.txt
-index 16772c9204bd..6b5182b4f7b8 100644
---- a/product/src/main/resources/required-productized-camel-artifacts.txt
-+++ b/product/src/main/resources/required-productized-camel-artifacts.txt
-@@ -151,7 +151,6 @@ camel-paho
- camel-paho-mqtt5
- camel-platform-http
- camel-platform-http-vertx
--camel-pqc
- camel-qdrant
- camel-quartz
- camel-ref
 -- 
 2.54.0 (Apple Git-157)
 
