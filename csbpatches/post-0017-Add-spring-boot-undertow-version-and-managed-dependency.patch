@@ -1,0 +1,43 @@
+From 736c4804d7a9da0c86ba4cb5156d507e6f9eea86 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Tue, 25 Aug 2026 13:53:17 +0200
+Subject: Add spring-boot-undertow-version property and managed dependency
+
+The BOM generator template references ${spring-boot-undertow-version} but
+the property was never defined on the 4.22 branch (it was added on 4.21
+in 68fdbf1f). Without it, the generated Red Hat BOM contains the literal
+string ${spring-boot-undertow-version}, breaking examples, SAP quickstarts,
+and any consumer importing the BOM.
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+---
+ pom.xml | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/pom.xml b/pom.xml
+index 85db2217826..e7b2713cd2d 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -112,6 +112,7 @@
+     <kryo-version>2.24.0</kryo-version>
+     <narayana-spring-boot.version>4.0.0-SNAPSHOT</narayana-spring-boot.version>
+     <openshift-maven-plugin-version>1.18.1.redhat-00007</openshift-maven-plugin-version>
++    <spring-boot-undertow-version>1.0.0.Alpha1-SNAPSHOT</spring-boot-undertow-version>
+     <org-json-json-version>20250517</org-json-json-version>
+     <parsson-version>1.1.7</parsson-version>
+     <perfmark-version>0.27.0</perfmark-version>
+@@ -169,6 +170,11 @@
+         <artifactId>j2objc-annotations</artifactId>
+         <version>${jobjc-version}</version>
+       </dependency>
++      <dependency>
++        <groupId>io.undertow</groupId>
++        <artifactId>undertow-spring-boot-starter</artifactId>
++        <version>${spring-boot-undertow-version}</version>
++      </dependency>
+       <dependency>
+         <groupId>dev.snowdrop</groupId>
+         <artifactId>narayana-spring-boot-core</artifactId>
+-- 
+2.54.0 (Apple Git-157)
+

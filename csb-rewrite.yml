@@ -8,22 +8,22 @@ recipeList:
       value: 4.16.2
   - org.openrewrite.maven.AddProperty:
       key: camel-community-version
-      value: 4.21.0
+      value: 4.22.1
   - org.openrewrite.maven.AddProperty:
       key: camel-spring-boot-community.version
-      value: 4.21.0
+      value: 4.22.1
   - org.openrewrite.maven.AddProperty:
       key: camel-sap.version
-      value: 4.10.0.redhat-00005
+      value: 4.22.1-SNAPSHOT
   - org.openrewrite.maven.AddProperty:
       key: camel-cics.version
-      value: 4.10.0.redhat-00005
+      value: 4.22.1-SNAPSHOT
   - org.openrewrite.maven.AddProperty:
       key: narayana-spring-boot.version
-      value: 3.2.0.redhat-00006
+      value: 4.1.1-SNAPSHOT
   - org.openrewrite.maven.AddProperty:
       key: camel-kamelets-version
-      value: 4.21.0
+      value: 4.22.1
   - org.openrewrite.maven.AddProperty:
       key: cyclonedx-maven-plugin-version
       value: 2.9.1
@@ -68,7 +68,7 @@ recipeList:
       value: 4.2.1
   - org.openrewrite.maven.AddProperty:
       key: openshift-maven-plugin-version
-      value: 1.18.1.redhat-00007
+      value: 1.19.1.redhat-00001
   - org.openrewrite.maven.AddProperty:
       key: wiremock-spring-boot-version
       value: 3.10.6

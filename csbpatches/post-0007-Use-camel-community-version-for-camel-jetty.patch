@@ -1,17 +1,18 @@
-From 880e0ba54c5ee9f64fcf77114a30629a8313c348 Mon Sep 17 00:00:00 2001
+From 23b0ea0bf1f7f6e652d89d48569a37147ef18bfe Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Wed, 11 Dec 2024 12:35:17 -0500
-Subject: [PATCH] Use camel-community-version for camel-jetty
+Subject: Use camel-community-version for camel-jetty
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  core/camel-spring-boot-xml/pom.xml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/core/camel-spring-boot-xml/pom.xml b/core/camel-spring-boot-xml/pom.xml
-index cffb04a40c3..3a97f9b4575 100644
+index 5db29cc2f66..fc4894f53ab 100644
 --- a/core/camel-spring-boot-xml/pom.xml
 +++ b/core/camel-spring-boot-xml/pom.xml
-@@ -108,7 +108,7 @@
+@@ -103,7 +103,7 @@
          <dependency>
              <groupId>org.apache.camel</groupId>
              <artifactId>camel-jetty</artifactId>
@@ -21,5 +22,5 @@ index cffb04a40c3..3a97f9b4575 100644
          </dependency>
      </dependencies>
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

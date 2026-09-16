@@ -1,0 +1,24 @@
+From 8193bb95e3f1c16862e46bf7db41a206df96946f Mon Sep 17 00:00:00 2001
+From: Tom Cunningham <tcunning@redhat.com>
+Date: Fri, 22 May 2026 11:14:26 -0400
+Subject: Add MVNW_REPOURL to route maven zip downloads through RH nexus
+
+---
+ Jenkinsfile.redhat | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Jenkinsfile.redhat b/Jenkinsfile.redhat
+index a5ad9d8b483..5978b25742e 100644
+--- a/Jenkinsfile.redhat
++++ b/Jenkinsfile.redhat
+@@ -28,6 +28,7 @@ pipeline {
+ 
+     environment {
+         MAVEN_OPTS = '-Xmx3g'
++        MVNW_REPOURL = 'https://nexus.corp.redhat.com/repository/maven-central/'
+     }
+ 
+     options {
+-- 
+2.54.0 (Apple Git-157)
+

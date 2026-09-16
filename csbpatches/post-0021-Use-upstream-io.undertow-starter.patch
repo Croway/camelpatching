@@ -1,0 +1,42 @@
+From c457c8fb64fa7b7124c4b962aac6c3bce7a78cc0 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Wed, 26 Aug 2026 16:00:59 +0200
+Subject: Use the upstream io.undertow Spring Boot starter
+
+---
+ .../src/main/resources/archetype-resources/pom.xml              | 2 +-
+ components-starter/camel-platform-http-starter/pom.xml          | 2 +-
+ core/camel-spring-boot/src/main/docs/spring-boot.adoc           | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/components-starter/camel-platform-http-starter/pom.xml b/components-starter/camel-platform-http-starter/pom.xml
+index aff9c9a8736..45f165d070d 100644
+--- a/components-starter/camel-platform-http-starter/pom.xml
++++ b/components-starter/camel-platform-http-starter/pom.xml
+@@ -60,7 +60,7 @@
+     <!-- https://github.com/apache/camel-spring-boot/commit/1bb2b737a4cc1301945a1084e5a5cbb2e4744690 -->
+     <!-- https://github.com/apache/camel-spring-boot/commit/16e8983051d473638701edcbb8b333022ac2eb90 -->
+     <!--dependency>
+-      <groupId>org.springframework.boot</groupId>
+-      <artifactId>spring-boot-starter-undertow</artifactId>
++      <groupId>io.undertow</groupId>
++      <artifactId>undertow-spring-boot-starter</artifactId>
+       <version>${spring-boot-version}</version>
+       <optional>true</optional>
+diff --git a/core/camel-spring-boot/src/main/docs/spring-boot.adoc b/core/camel-spring-boot/src/main/docs/spring-boot.adoc
+index 63ad5d27530..d0c0f198019 100644
+--- a/core/camel-spring-boot/src/main/docs/spring-boot.adoc
++++ b/core/camel-spring-boot/src/main/docs/spring-boot.adoc
+@@ -635,7 +635,7 @@ When using the Platform HTTP component with Undertow as the underlying web serve
+ [source,xml]
+ ----
+ <dependency>
+-    <groupId>org.springframework.boot</groupId>
+-    <artifactId>spring-boot-starter-undertow</artifactId>
++    <groupId>io.undertow</groupId>
++    <artifactId>undertow-spring-boot-starter</artifactId>
+ </dependency>
+ ----
+-- 
+2.54.0 (Apple Git-157)
+

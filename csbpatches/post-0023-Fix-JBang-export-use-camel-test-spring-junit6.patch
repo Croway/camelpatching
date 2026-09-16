@@ -1,0 +1,42 @@
+From 2546a14e6b4ef957a90bce74c434eb213bd6bc91 Mon Sep 17 00:00:00 2001
+From: Marco Carletti <mcarlett@ibm.com>
+Date: Tue, 1 Sep 2026 14:33:55 +0200
+Subject: Fix Spring Boot JBang export: use camel-test-spring-junit6
+
+The camel-jbang Spring Boot export template declared the test
+dependency org.apache.camel:camel-test-spring-junit5 without a
+version, relying on the imported camel-spring-boot-bom to manage it.
+Since the Spring Boot 4.0 upgrade the BOM manages
+camel-test-spring-junit6 instead of junit5, so every exported project
+failed at POM read time with:
+
+  'dependencies.dependency.version' for
+  org.apache.camel:camel-test-spring-junit5:jar is missing
+
+This broke all TNB kamelets tests for CSB 4.22 (CSB-10482), where each
+generated Spring Boot application failed to build. Switch the template
+to camel-test-spring-junit6, which is managed by the BOM.
+
+Fixes: CSB-10482
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+---
+ .../org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl b/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl
+index 67d2be49333..56a0c72314a 100644
+--- a/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl
++++ b/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl
+@@ -68,7 +68,7 @@
+         </dependency>
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+-            <artifactId>camel-test-spring-junit5</artifactId>
++            <artifactId>camel-test-spring-junit6</artifactId>
+             <scope>test</scope>
+         </dependency>
+     </dependencies>
+-- 
+2.54.0 (Apple Git-157)
+

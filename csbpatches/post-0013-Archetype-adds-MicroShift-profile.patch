@@ -1,12 +1,12 @@
-From b1042321abe8671c35097977717f4f669bb949ba Mon Sep 17 00:00:00 2001
+From d454ea994ac04e90ed6cee1ef9e707141ef47dea Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Fri, 25 Jul 2025 10:41:31 -0400
-Subject: [PATCH] Archetype: adds MicroShift profile
+Subject: Archetype: adds MicroShift profile
 
 ---
  .../camel-archetype-spring-boot/pom.xml       | 29 ++++++++++++++++
- .../resources/archetype-resources/pom.xml     | 33 +++++++++++++++++++
  .../resources/archetype-resources/README.adoc | 21 ++++++++++++
+ .../resources/archetype-resources/pom.xml     | 33 +++++++++++++++++++
  .../projects/build-it/archetype.properties    |  8 -----
  .../deploy-on-microshift/archetype.properties | 20 +++++++++++
  .../projects/deploy-on-microshift/goal.txt    |  1 +
@@ -20,7 +20,7 @@ Subject: [PATCH] Archetype: adds MicroShift profile
  create mode 100644 archetypes/camel-archetype-spring-boot/src/test/resources/projects/deploy-on-ocp/goal.txt
 
 diff --git a/archetypes/camel-archetype-spring-boot/pom.xml b/archetypes/camel-archetype-spring-boot/pom.xml
-index 2f28c6d9856..72ff045162b 100644
+index 7811c2b4b7a..2a2f2c0b5c1 100644
 --- a/archetypes/camel-archetype-spring-boot/pom.xml
 +++ b/archetypes/camel-archetype-spring-boot/pom.xml
 @@ -35,6 +35,8 @@
@@ -64,8 +64,40 @@ index 2f28c6d9856..72ff045162b 100644
 +    </profiles>
 +
  </project>
+diff --git a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
+index 00c9e597f50..a2f90fad878 100644
+--- a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
++++ b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
+@@ -28,6 +28,27 @@ You can run unit test of this example using
+ 
+     ./mvnw clean test
+ 
++== How to deploy on OpenShift
++
++You can deploy on OpenShift using
++
++    mvn clean install -P openshift
++
++the application will be built and deployed on the current project on the logged-in OpenShift cluster, so please be sure you are correctly logged in before running the command
++
++== How to deploy on MicroShift
++
++You can deploy on MicroShift using
++
++    mvn clean install -P microshift -Djkube.docker.registry=[docker registry]
++
++the application will be deployed on the current project on the logged-in MicroShift cluster, so please be sure you are correctly logged in before running the command. Since MicroShift doesn't have an internal OCI registry, it is necessary to push/pull images externally, so a docker registry is needed (eg: `quay.io/my-organization` ) moreover if the registry is private the command requires the credentials for push and/or pull - https://eclipse.dev/jkube/docs/openshift-maven-plugin/#_pull_vs_push_authentication[documentation] eg:
++
++    mvn clean install -P microshift \
++        -Djkube.docker.registry=quay.io/my-organization \
++        -Djkube.docker.username=myuser \
++        -Djkube.docker.password=mypassword
++
+ == More information
+ 
+ You can find more information about Apache Camel at the website: http://camel.apache.org/
 diff --git a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/pom.xml b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/pom.xml
-index 87c2108c7f0..a8a624a3462 100644
+index c2ce8643ef6..77e12c361e4 100644
 --- a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/pom.xml
 +++ b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/pom.xml
 @@ -36,6 +36,7 @@
@@ -76,7 +108,7 @@ index 87c2108c7f0..a8a624a3462 100644
    </properties>
  
    <dependencyManagement>
-@@ -178,5 +179,37 @@
+@@ -168,5 +169,37 @@
          </plugins>
        </build>
      </profile>
@@ -114,38 +146,6 @@ index 87c2108c7f0..a8a624a3462 100644
 +    </profile>
    </profiles>
  </project>
-diff --git a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
-index 8d63b48289d..fd326b80a03 100644
---- a/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
-+++ b/archetypes/camel-archetype-spring-boot/src/main/resources/archetype-resources/README.adoc
-@@ -28,6 +28,27 @@ You can run unit test of this example using
- 
-     mvn clean test
- 
-+== How to deploy on OpenShift
-+
-+You can deploy on OpenShift using
-+
-+    mvn clean install -P openshift
-+
-+the application will be built and deployed on the current project on the logged-in OpenShift cluster, so please be sure you are correctly logged in before running the command
-+
-+== How to deploy on MicroShift
-+
-+You can deploy on MicroShift using
-+
-+    mvn clean install -P microshift -Djkube.docker.registry=[docker registry]
-+
-+the application will be deployed on the current project on the logged-in MicroShift cluster, so please be sure you are correctly logged in before running the command. Since MicroShift doesn't have an internal OCI registry, it is necessary to push/pull images externally, so a docker registry is needed (eg: `quay.io/my-organization` ) moreover if the registry is private the command requires the credentials for push and/or pull - https://eclipse.dev/jkube/docs/openshift-maven-plugin/#_pull_vs_push_authentication[documentation] eg:
-+
-+    mvn clean install -P microshift \
-+        -Djkube.docker.registry=quay.io/my-organization \
-+        -Djkube.docker.username=myuser \
-+        -Djkube.docker.password=mypassword
-+
- == More information
- 
- You can find more information about Apache Camel at the website: http://camel.apache.org/
 diff --git a/archetypes/camel-archetype-spring-boot/src/test/resources/projects/build-it/archetype.properties b/archetypes/camel-archetype-spring-boot/src/test/resources/projects/build-it/archetype.properties
 index aa28a246ede..866272e060e 100644
 --- a/archetypes/camel-archetype-spring-boot/src/test/resources/projects/build-it/archetype.properties
@@ -252,5 +252,5 @@ index 554268ef11b..72558189129 100644
 +package=org.apache.camel.archetypes.archetypeIT
 \ No newline at end of file
 -- 
-2.48.1
+2.54.0 (Apple Git-157)
 

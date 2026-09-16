@@ -1,0 +1,261 @@
+From d1c15973d9321334c00119729c8047af703b8b01 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Mon, 24 Aug 2026 20:12:01 +0200
+Subject: Backport PNC alignment fixes from 4.19 to 4.22
+
+- Use camel-community-version for camel-test-infra-* test deps (14 starters)
+  PME aligns camel-version property globally, which breaks test-infra
+  resolution since those artifacts are not built in PNC
+- Add openshift-maven-plugin to pluginManagement for PME alignment
+- Add guava exclusions (error_prone_annotations, checker-qual) to
+  camel-google-bigquery-starter
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+---
+ components-starter/camel-aws2-cw-starter/pom.xml       |  2 +-
+ components-starter/camel-aws2-ddb-starter/pom.xml      |  2 +-
+ components-starter/camel-aws2-kinesis-starter/pom.xml  |  2 +-
+ components-starter/camel-aws2-s3-starter/pom.xml       |  2 +-
+ components-starter/camel-aws2-sns-starter/pom.xml      |  2 +-
+ components-starter/camel-aws2-sqs-starter/pom.xml      |  2 +-
+ components-starter/camel-cassandraql-starter/pom.xml   |  2 +-
+ components-starter/camel-fhir-starter/pom.xml          |  2 +-
+ components-starter/camel-ftp-starter/pom.xml           |  2 +-
+ .../camel-google-bigquery-starter/pom.xml              | 10 ++++++++++
+ .../camel-hashicorp-vault-starter/pom.xml              |  2 +-
+ components-starter/camel-infinispan-starter/pom.xml    |  2 +-
+ components-starter/camel-kafka-starter/pom.xml         |  2 +-
+ components-starter/camel-mina-sftp-starter/pom.xml     |  2 +-
+ components-starter/camel-mongodb-starter/pom.xml       |  4 ++--
+ pom.xml                                                |  5 +++++
+ 16 files changed, 30 insertions(+), 15 deletions(-)
+
+diff --git a/components-starter/camel-aws2-cw-starter/pom.xml b/components-starter/camel-aws2-cw-starter/pom.xml
+index d37c67d7e5d..6a13e5e9fb0 100644
+--- a/components-starter/camel-aws2-cw-starter/pom.xml
++++ b/components-starter/camel-aws2-cw-starter/pom.xml
+@@ -42,7 +42,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-aws2-ddb-starter/pom.xml b/components-starter/camel-aws2-ddb-starter/pom.xml
+index d0375a09385..0b32a6b46dc 100644
+--- a/components-starter/camel-aws2-ddb-starter/pom.xml
++++ b/components-starter/camel-aws2-ddb-starter/pom.xml
+@@ -42,7 +42,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/components-starter/camel-aws2-kinesis-starter/pom.xml b/components-starter/camel-aws2-kinesis-starter/pom.xml
+index ab6793ddb6a..bf2011b1afe 100644
+--- a/components-starter/camel-aws2-kinesis-starter/pom.xml
++++ b/components-starter/camel-aws2-kinesis-starter/pom.xml
+@@ -51,7 +51,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-aws2-s3-starter/pom.xml b/components-starter/camel-aws2-s3-starter/pom.xml
+index 63b9a94bb17..24abd001263 100644
+--- a/components-starter/camel-aws2-s3-starter/pom.xml
++++ b/components-starter/camel-aws2-s3-starter/pom.xml
+@@ -42,7 +42,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/components-starter/camel-aws2-sns-starter/pom.xml b/components-starter/camel-aws2-sns-starter/pom.xml
+index 4bb2104e6ea..73e615cb38a 100644
+--- a/components-starter/camel-aws2-sns-starter/pom.xml
++++ b/components-starter/camel-aws2-sns-starter/pom.xml
+@@ -42,7 +42,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-aws2-sqs-starter/pom.xml b/components-starter/camel-aws2-sqs-starter/pom.xml
+index 72e52d032b3..ec015fd0858 100644
+--- a/components-starter/camel-aws2-sqs-starter/pom.xml
++++ b/components-starter/camel-aws2-sqs-starter/pom.xml
+@@ -48,7 +48,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-aws-v2</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/components-starter/camel-cassandraql-starter/pom.xml b/components-starter/camel-cassandraql-starter/pom.xml
+index fce3064379a..571becbf871 100644
+--- a/components-starter/camel-cassandraql-starter/pom.xml
++++ b/components-starter/camel-cassandraql-starter/pom.xml
+@@ -43,7 +43,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-cassandra</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/components-starter/camel-fhir-starter/pom.xml b/components-starter/camel-fhir-starter/pom.xml
+index 7978770ee2b..0db10e29a07 100644
+--- a/components-starter/camel-fhir-starter/pom.xml
++++ b/components-starter/camel-fhir-starter/pom.xml
+@@ -78,7 +78,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-fhir</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-ftp-starter/pom.xml b/components-starter/camel-ftp-starter/pom.xml
+index 9cfaeaa9bbe..d6fb7a3f972 100644
+--- a/components-starter/camel-ftp-starter/pom.xml
++++ b/components-starter/camel-ftp-starter/pom.xml
+@@ -54,7 +54,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-ftp</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!-- for testing sftp -->
+diff --git a/components-starter/camel-google-bigquery-starter/pom.xml b/components-starter/camel-google-bigquery-starter/pom.xml
+index 82caa921d2d..0d7e4853c58 100644
+--- a/components-starter/camel-google-bigquery-starter/pom.xml
++++ b/components-starter/camel-google-bigquery-starter/pom.xml
+@@ -38,6 +38,16 @@
+       <groupId>com.google.guava</groupId>
+       <artifactId>guava</artifactId>
+       <version>${guava-version}</version>
++      <exclusions>
++        <exclusion>
++          <groupId>com.google.errorprone</groupId>
++          <artifactId>error_prone_annotations</artifactId>
++        </exclusion>
++        <exclusion>
++          <groupId>org.checkerframework</groupId>
++          <artifactId>checker-qual</artifactId>
++        </exclusion>
++      </exclusions>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+diff --git a/components-starter/camel-hashicorp-vault-starter/pom.xml b/components-starter/camel-hashicorp-vault-starter/pom.xml
+index 44d061c5f8b..83bc1489438 100644
+--- a/components-starter/camel-hashicorp-vault-starter/pom.xml
++++ b/components-starter/camel-hashicorp-vault-starter/pom.xml
+@@ -66,7 +66,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-hashicorp-vault</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-infinispan-starter/pom.xml b/components-starter/camel-infinispan-starter/pom.xml
+index f97a319df2d..c9cb596951f 100644
+--- a/components-starter/camel-infinispan-starter/pom.xml
++++ b/components-starter/camel-infinispan-starter/pom.xml
+@@ -90,7 +90,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-infinispan</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!-- testing - infinispan -->
+diff --git a/components-starter/camel-kafka-starter/pom.xml b/components-starter/camel-kafka-starter/pom.xml
+index 797cbec5296..b7bb71d3b82 100644
+--- a/components-starter/camel-kafka-starter/pom.xml
++++ b/components-starter/camel-kafka-starter/pom.xml
+@@ -65,7 +65,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-kafka</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/components-starter/camel-mina-sftp-starter/pom.xml b/components-starter/camel-mina-sftp-starter/pom.xml
+index bca5cd54bf7..624b8d6b003 100644
+--- a/components-starter/camel-mina-sftp-starter/pom.xml
++++ b/components-starter/camel-mina-sftp-starter/pom.xml
+@@ -42,7 +42,7 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-ftp</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <!--START OF GENERATED CODE-->
+diff --git a/components-starter/camel-mongodb-starter/pom.xml b/components-starter/camel-mongodb-starter/pom.xml
+index e45480ed4c6..8540579a1f9 100644
+--- a/components-starter/camel-mongodb-starter/pom.xml
++++ b/components-starter/camel-mongodb-starter/pom.xml
+@@ -43,13 +43,13 @@
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-mongodb</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.camel</groupId>
+       <artifactId>camel-test-infra-common</artifactId>
+-      <version>${camel-version}</version>
++      <version>${camel-community-version}</version>
+       <scope>test</scope>
+     </dependency>
+     <dependency>
+diff --git a/pom.xml b/pom.xml
+index ed3745a0e54..85db2217826 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -604,6 +604,11 @@
+                     <artifactId>build-helper-maven-plugin</artifactId>
+                     <version>${build-helper-maven-plugin-version}</version>
+                 </plugin>
++                <plugin>
++                    <groupId>org.eclipse.jkube</groupId>
++                    <artifactId>openshift-maven-plugin</artifactId>
++                    <version>${openshift-maven-plugin-version}</version>
++                </plugin>
+             </plugins>
+         </pluginManagement>
+     </build>
+-- 
+2.54.0 (Apple Git-157)
+

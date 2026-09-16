@@ -1,8 +1,9 @@
-From 87a3b74ffd7af6bf2cd5dfc17153467ea50b0a71 Mon Sep 17 00:00:00 2001
+From fa40ce4518010199538fc00fffe81298a0c9cedb Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Mon, 23 Sep 2024 10:48:57 -0400
-Subject: [PATCH] Add Jenkinsfile.redhat (#423)
+Subject: Add Jenkinsfile.redhat (#423)
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  Jenkinsfile.redhat | 77 ++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 77 insertions(+)
@@ -92,5 +93,5 @@ index 00000000000..a5ad9d8b483
 +    }
 +}
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

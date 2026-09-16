@@ -1,0 +1,39 @@
+From d4b7f824b87ab5fe2624212381d8867b966b2634 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Tue, 25 Aug 2026 17:11:13 +0200
+Subject: Use undertow-servlet-version for undertow-servlet and websockets-jsr
+ in BOM
+
+Camel 4.22 split undertow versions: undertow-core uses undertow-version
+(2.4.2.Final) while undertow-servlet and undertow-websockets-jsr use
+undertow-servlet-version (2.3.26.Final). The BOM template was using
+undertow-version for all three, but undertow-servlet 2.4.2.Final does
+not exist on Maven Central.
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+---
+ .../src/main/resources/pom.xml                                | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml b/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
+index f0ce22c7216..574549dea28 100644
+--- a/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
++++ b/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
+@@ -122,12 +122,12 @@
+             <dependency>
+                 <groupId>io.undertow</groupId>
+                 <artifactId>undertow-servlet</artifactId>
+-                <version>${undertow-version}</version>
++                <version>${undertow-servlet-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>io.undertow</groupId>
+                 <artifactId>undertow-websockets-jsr</artifactId>
+-                <version>${undertow-version}</version>
++                <version>${undertow-servlet-version}</version>
+             </dependency>
+             <!-- Overrides guava -->
+             <dependency>
+-- 
+2.54.0 (Apple Git-157)
+

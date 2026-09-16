@@ -1,8 +1,9 @@
-From dbd4ee7e11d90443ab1e0c92c4f44589dc552695 Mon Sep 17 00:00:00 2001
+From 506eb80a3837f9a2ad083b74abc7553bc08cee59 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Wed, 18 Sep 2024 14:13:08 -0400
-Subject: [PATCH] CSB-1272: Platform template for jbang (#426)
+Subject: CSB-1272: Platform template for jbang (#426)
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  .../catalog/camel-jbang/spring-boot-pom.tmpl  | 134 ++++++++++++++++++
  1 file changed, 134 insertions(+)
@@ -10,7 +11,7 @@ Subject: [PATCH] CSB-1272: Platform template for jbang (#426)
 
 diff --git a/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl b/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl
 new file mode 100644
-index 00000000000..d1bcedc86aa
+index 00000000000..67d2be49333
 --- /dev/null
 +++ b/catalog/camel-catalog-provider-springboot/src/main/resources/org/apache/camel/catalog/camel-jbang/spring-boot-pom.tmpl
 @@ -0,0 +1,134 @@
@@ -63,8 +64,8 @@ index 00000000000..d1bcedc86aa
 +			</exclusions>
 +		</dependency>
 +		<dependency>
-+			<groupId>org.springframework.boot</groupId>
-+			<artifactId>spring-boot-starter-undertow</artifactId>
++			<groupId>io.undertow</groupId>
++			<artifactId>undertow-spring-boot-starter</artifactId>
 +		</dependency>
 +		<dependency>
 +			<groupId>org.springframework.boot</groupId>
@@ -149,5 +150,5 @@ index 00000000000..d1bcedc86aa
 +
 +</project>
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

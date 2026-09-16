@@ -1,0 +1,25 @@
+From a450f3fe6ab26eab1c4f8ef29b93f630f1ac59af Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Mon, 24 Aug 2026 10:27:25 +0200
+Subject: Remove non-existent redhat-camel-spring-boot-bom module
+
+---
+ tooling/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tooling/pom.xml b/tooling/pom.xml
+index 3b470ff166f..82bbbb3c68b 100644
+--- a/tooling/pom.xml
++++ b/tooling/pom.xml
+@@ -42,7 +42,7 @@
+         <module>camel-starter-parent</module>
+         <module>camel-spring-boot-starter-generator</module>
+         <module>redhat-camel-spring-boot-bom-generator</module>
+-        <module>redhat-camel-spring-boot-bom</module>
++
+         <module>redhat-patch-maven-plugin</module>
+     </modules>
+ 
+-- 
+2.54.0 (Apple Git-157)
+

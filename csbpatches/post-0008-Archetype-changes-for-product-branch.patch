@@ -1,11 +1,29 @@
-From ae9720461ea0000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 437cbc1dafd8fcf9e6b58fd5c886853dfe675197 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Tue, 14 Jan 2025 15:15:01 -0500
-Subject: [PATCH] Archetype changes for product branch (#422) (#495)
+Subject: Archetype changes for product branch (#422) (#495)
 
 Co-authored-by: Marco Carletti <mcarlett@redhat.com>
 Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
+ .../META-INF/maven/archetype-metadata.xml     |   5 +-
+ .../resources/archetype-resources/pom.xml     |  89 +++++++++++----
+ .../projects/build-it/archetype.properties    |   5 +-
+ .../projects/run-it/archetype.properties      |   5 +-
+ archetypes/pom.xml                            |   2 +-
+ maintenance/pom.xml                           |  40 +++++++
+ .../pom.xml                                   |  71 ++++++++++++
+ .../src/main/resources/metadata.xml           |  33 ++++++
+ .../pom.xml                                   | 107 ++++++++++++++++++
+ .../src/main/descriptors/repository.xml       |  48 ++++++++
+ pom.xml                                       |  26 +++++
+ 11 files changed, 405 insertions(+), 26 deletions(-)
+ create mode 100644 maintenance/pom.xml
+ create mode 100644 maintenance/redhat-camel-spring-boot-patch-metadata/pom.xml
+ create mode 100644 maintenance/redhat-camel-spring-boot-patch-metadata/src/main/resources/metadata.xml
+ create mode 100644 maintenance/redhat-camel-spring-boot-patch-repository/pom.xml
+ create mode 100644 maintenance/redhat-camel-spring-boot-patch-repository/src/main/descriptors/repository.xml
+
 diff --git a/archetypes/camel-archetype-spring-boot/src/main/resources-filtered/META-INF/maven/archetype-metadata.xml b/archetypes/camel-archetype-spring-boot/src/main/resources-filtered/META-INF/maven/archetype-metadata.xml
 index 2e63d3e662e..a90b90f8b75 100644
 --- a/archetypes/camel-archetype-spring-boot/src/main/resources-filtered/META-INF/maven/archetype-metadata.xml
@@ -188,7 +206,7 @@ index 29a04ed6d2e..554268ef11b 100644
 +spring-boot-version=${spring-boot-version}
 +openshift-maven-plugin-version=${openshift-maven-plugin-version}
 diff --git a/archetypes/pom.xml b/archetypes/pom.xml
-index 8812c8641d2..52b258d47ca 100644
+index 17ac7cb8555..58ac0371dc2 100644
 --- a/archetypes/pom.xml
 +++ b/archetypes/pom.xml
 @@ -41,7 +41,7 @@
@@ -530,10 +548,10 @@ index 00000000000..fc304cfaa5d
 +
 +</assembly>
 diff --git a/pom.xml b/pom.xml
-index 63cf1ce437e..2541c52fad8 100644
+index e070a41bef6..c4272282f48 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -580,6 +580,26 @@
+@@ -584,6 +584,26 @@
                          </excludes>
                      </configuration>
                  </plugin>
@@ -560,7 +578,7 @@ index 63cf1ce437e..2541c52fad8 100644
              </plugins>
          </pluginManagement>
      </build>
-@@ -1026,5 +1046,11 @@
+@@ -1041,5 +1061,11 @@
              </plugins>
              </build>
          </profile>
@@ -572,3 +590,6 @@ index 63cf1ce437e..2541c52fad8 100644
 +        </profile>
      </profiles>
  </project>
+-- 
+2.54.0 (Apple Git-157)
+

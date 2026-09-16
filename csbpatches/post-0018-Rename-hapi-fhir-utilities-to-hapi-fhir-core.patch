@@ -1,0 +1,63 @@
+From e06c72ce285aa005742a0636c7eb683de784fc60 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Tue, 25 Aug 2026 14:47:40 +0200
+Subject: Rename hapi-fhir-utilities-version to hapi-fhir-core-version in BOM
+ template
+
+The Camel 4.22 parent POM renamed this property from
+hapi-fhir-utilities-version to hapi-fhir-core-version. The BOM generator
+template still referenced the old name, leaving it unresolved in the
+generated Red Hat BOM and breaking the FHIR example build.
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+---
+ .../src/main/resources/pom.xml                       | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml b/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
+index 1bd938112d8..f0ce22c7216 100644
+--- a/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
++++ b/tooling/redhat-camel-spring-boot-bom-generator/src/main/resources/pom.xml
+@@ -369,33 +369,33 @@
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.utilities</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+ 
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.r4</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.r5</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.dstu2016may</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.dstu2</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>ca.uhn.hapi.fhir</groupId>
+                 <artifactId>org.hl7.fhir.dstu3</artifactId>
+-                <version>${hapi-fhir-utilities-version}</version>
++                <version>${hapi-fhir-core-version}</version>
+             </dependency>
+ 
+             <dependency>
+-- 
+2.54.0 (Apple Git-157)
+

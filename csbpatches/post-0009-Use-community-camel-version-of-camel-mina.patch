@@ -1,14 +1,15 @@
-From bca40537bad5187587a4370cca746f56c0f35d8d Mon Sep 17 00:00:00 2001
+From ab95393f70a307bf2efe334211cdef72f01165a8 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Tue, 8 Oct 2024 10:08:45 -0400
-Subject: [PATCH] Use community camel version of camel-mina
+Subject: Use community camel version of camel-mina
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  components-starter/camel-hl7-starter/pom.xml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/components-starter/camel-hl7-starter/pom.xml b/components-starter/camel-hl7-starter/pom.xml
-index 740d0580f62..5c793216b6b 100644
+index 0e4d0296c92..44b92c3c089 100644
 --- a/components-starter/camel-hl7-starter/pom.xml
 +++ b/components-starter/camel-hl7-starter/pom.xml
 @@ -90,7 +90,7 @@
@@ -21,5 +22,5 @@ index 740d0580f62..5c793216b6b 100644
      </dependency>
      <!--START OF GENERATED CODE-->
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

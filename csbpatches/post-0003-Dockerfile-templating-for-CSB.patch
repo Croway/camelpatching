@@ -1,8 +1,9 @@
-From ed3ea5bfbff176d37765346b7a90d8e33173bfa4 Mon Sep 17 00:00:00 2001
+From 863a4af960659450ac116364c2f46f268f3012db Mon Sep 17 00:00:00 2001
 From: Salvatore Mongiardo <smongiar@redhat.com>
 Date: Wed, 17 Sep 2025 16:20:39 +0200
-Subject: [PATCH] Dockerfile templating for CSB
+Subject: Dockerfile templating for CSB
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  .../docker/templates/Dockerfile17.tmpl        | 109 ++++++++++++++++++
  .../docker/templates/Dockerfile21.tmpl        | 109 ++++++++++++++++++
@@ -280,5 +281,5 @@ index 00000000000..e21e3135e42
 +docker run -it {{ .ArtifactId }}:{{ .Version }}
 +```
 -- 
-2.48.1
+2.54.0 (Apple Git-157)
 

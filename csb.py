@@ -201,11 +201,12 @@ def apply_patch(patch_file, debug=False, use_reject_mode=False):
                 # 3-way merge succeeded!
                 print_success(f"Applied {patch_file.name} (via 3-way merge)")
 
-# Set JAVA_HOME
-os.environ['JAVA_HOME'] = "/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home"
+# Set JAVA_HOME - override in the environment for a non-Homebrew JDK
+os.environ.setdefault('JAVA_HOME', "/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home")
 
 # Set truststore for PNC/Indy access
-os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + " -Djavax.net.ssl.trustStore=/Users/fmariani/.pnc-bacon/truststore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+TRUSTSTORE = os.environ.get('PNC_TRUSTSTORE', os.path.expanduser("~/.pnc-bacon/truststore.jks"))
+os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + f" -Djavax.net.ssl.trustStore={TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=changeit"
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Camel Spring Boot patching automation script')
@@ -222,12 +223,12 @@ debug_mode = args.debug
 use_reject = args.use_reject
 
 # Configuration
-vers = "4.21.0"
+vers = "4.22.1"
 dir_name = f"camel-spring-boot-{vers}-branch"
 patchdir = "csbpatches"
 
 upstreambranch = f"camel-spring-boot-{vers}"
-currentprodbranch = "camel-spring-boot-4.19.0-branch"
+currentprodbranch = "camel-spring-boot-4.22.0-branch"
 prodlocation = "csbprodlocation"
 
 # Print welcome banner
@@ -277,6 +278,19 @@ run_command([
 run_command(["git", "commit", "-a", "-m", f"Change versions to {vers}-SNAPSHOT"],
             "Committing version changes")
 
+# versions:set also rewrites the generated Spring Boot catalog resources, which must
+# advertise the community release rather than the downstream SNAPSHOT.
+catalog = Path("catalog/camel-catalog-provider-springboot/src/main/resources")
+fixed = 0
+for js in catalog.rglob("*.json"):
+    text = js.read_text()
+    if f'"version": "{vers}-SNAPSHOT"' in text:
+        js.write_text(text.replace(f'"version": "{vers}-SNAPSHOT"', f'"version": "{vers}"'))
+        fixed += 1
+print_success(f"Reset {fixed} catalog JSON resources to {vers}")
+run_command(["git", "commit", "-a", "-m", f"Fix SNAPSHOT versions in catalog JSON resources for {vers}"],
+            "Committing catalog version fix")
+
 # Copy and run rewrite
 print_info("Running OpenRewrite")
 run_command(["cp", "../csb-rewrite.yml", "./rewrite.yml"], "Copying rewrite.yml")
@@ -312,6 +326,14 @@ console.print("  [dim]→ Copying cics directory[/dim]")
 subprocess.run(["cp", "-r", f"../{prodlocation}/cics", "."])
 subprocess.run(["git", "add", "cics"])
 print_success("CICS directory copied")
+
+# These tooling modules are downstream-only: upstream does not have them and the
+# product plugin does not generate them.
+for tool in ("redhat-camel-spring-boot-bom-generator", "redhat-patch-maven-plugin"):
+    console.print(f"  [dim]→ Copying tooling/{tool}[/dim]")
+    subprocess.run(["cp", "-r", f"../{prodlocation}/tooling/{tool}", "tooling/"])
+    subprocess.run(["git", "add", f"tooling/{tool}"])
+    print_success(f"tooling/{tool} copied")
 
 # Run prod-maven-plugin
 print_step(6, 9, "Running prod-maven-plugin")
