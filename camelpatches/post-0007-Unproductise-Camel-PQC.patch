@@ -1,0 +1,114 @@
+From 90f9acf4337237911b66c7b626e15a7f213aff9c Mon Sep 17 00:00:00 2001
+From: Federico Mariani <fmariani1@ibm.com>
+Date: Mon, 7 Sep 2026 09:43:36 +0200
+Subject: Unproductise Camel PQC
+
+---
+ .mvn/excludes.txt                                             | 1 +
+ bom/camel-bom/pom.xml                                         | 2 +-
+ catalog/camel-allcomponents/pom.xml                           | 2 +-
+ components/camel-pqc/pom.xml                                  | 4 ++--
+ components/pom.xml                                            | 2 +-
+ parent/pom.xml                                                | 2 +-
+ .../main/resources/required-productized-camel-artifacts.txt   | 1 -
+ 7 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/.mvn/excludes.txt b/.mvn/excludes.txt
+index d8a972538ff0..593f82d1ca04 100644
+--- a/.mvn/excludes.txt
++++ b/.mvn/excludes.txt
+@@ -239,6 +239,7 @@
+ :camel-pinecone
+ :camel-platform-http-jolokia
+ :camel-plc4x
++:camel-pqc
+ :camel-printer
+ :camel-protobuf
+ :camel-pubnub
+diff --git a/bom/camel-bom/pom.xml b/bom/camel-bom/pom.xml
+index 2a9c976bbbb9..c58ddca39414 100644
+--- a/bom/camel-bom/pom.xml
++++ b/bom/camel-bom/pom.xml
+@@ -1975,7 +1975,7 @@
+       <dependency>
+         <groupId>org.apache.camel</groupId>
+         <artifactId>camel-pqc</artifactId>
+-        <version>${project.version}</version>
++        <version>4.22.0</version>
+       </dependency>
+       <dependency>
+         <groupId>org.apache.camel</groupId>
+diff --git a/catalog/camel-allcomponents/pom.xml b/catalog/camel-allcomponents/pom.xml
+index 82191c8e7ca8..00142996b6ae 100644
+--- a/catalog/camel-allcomponents/pom.xml
++++ b/catalog/camel-allcomponents/pom.xml
+@@ -1760,7 +1760,7 @@
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-pqc</artifactId>
+-            <version>${project.version}</version>
++            <version>${camel-community-version}</version>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+diff --git a/components/camel-pqc/pom.xml b/components/camel-pqc/pom.xml
+index e9250ea1cfc7..5e84e47e7dc8 100644
+--- a/components/camel-pqc/pom.xml
++++ b/components/camel-pqc/pom.xml
+@@ -131,13 +131,13 @@
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-test-infra-hashicorp-vault</artifactId>
+-            <version>${camel-community-version}</version>
++            <version>${project.version}</version>
+             <scope>test</scope>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-test-infra-aws-v2</artifactId>
+-            <version>${camel-community-version}</version>
++            <version>${project.version}</version>
+             <scope>test</scope>
+         </dependency>
+         <dependency>
+diff --git a/components/pom.xml b/components/pom.xml
+index b7b157294f19..67ebb71ba2ae 100644
+--- a/components/pom.xml
++++ b/components/pom.xml
+@@ -271,7 +271,7 @@
+         <!-- <module>camel-protobuf</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+         <!-- <module>camel-pubnub</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+         <!-- <module>camel-pulsar</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+-        <module>camel-pqc</module>
++        <!-- <module>camel-pqc</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+         <!-- <module>camel-python</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+         <module>camel-quartz</module>
+         <!-- <module>camel-quickfix</module> disabled by cq-prod-maven-plugin:camel-prod-excludes -->
+diff --git a/parent/pom.xml b/parent/pom.xml
+index 3ecd3a385154..4c3965ddfa1c 100644
+--- a/parent/pom.xml
++++ b/parent/pom.xml
+@@ -2417,7 +2417,7 @@
+             <dependency>
+                 <groupId>org.apache.camel</groupId>
+                 <artifactId>camel-pqc</artifactId>
+-                <version>${project.version}</version>
++                <version>${camel-community-version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>org.apache.camel</groupId>
+diff --git a/product/src/main/resources/required-productized-camel-artifacts.txt b/product/src/main/resources/required-productized-camel-artifacts.txt
+index 16772c9204bd..6b5182b4f7b8 100644
+--- a/product/src/main/resources/required-productized-camel-artifacts.txt
++++ b/product/src/main/resources/required-productized-camel-artifacts.txt
+@@ -151,7 +151,6 @@ camel-paho
+ camel-paho-mqtt5
+ camel-platform-http
+ camel-platform-http-vertx
+-camel-pqc
+ camel-qdrant
+ camel-quartz
+ camel-ref
+-- 
+2.54.0 (Apple Git-157)
+

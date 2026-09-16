@@ -1,0 +1,25 @@
+From 07a18ae722a41c15719c63186bde9c6a713d0384 Mon Sep 17 00:00:00 2001
+From: Federico Mariani <fmariani1@ibm.com>
+Date: Thu, 27 Aug 2026 11:53:38 +0200
+Subject: chore: update XNIO baseline
+
+---
+ parent/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/parent/pom.xml b/parent/pom.xml
+index 0740380915af..886a32fead84 100644
+--- a/parent/pom.xml
++++ b/parent/pom.xml
+@@ -285,7 +285,7 @@
+         <jaxp-ri-version>1.4.5</jaxp-ri-version>
+         <jboss-logging-version>3.6.3.Final</jboss-logging-version>
+         <jboss-transaction-spi-version>7.6.1.Final</jboss-transaction-spi-version>
+-        <jboss-xnio-version>3.8.14.Final</jboss-xnio-version>
++        <jboss-xnio-version>3.8.17.Final</jboss-xnio-version>
+         <jcache-version>1.1.1</jcache-version>
+         <jcip-annotations-version>1.0-1</jcip-annotations-version>
+         <jcr-version>2.0</jcr-version>
+-- 
+2.54.0 (Apple Git-157)
+

@@ -1,17 +1,18 @@
-From f8691aeb171d90dac8a4a7bd03af1f3401640f07 Mon Sep 17 00:00:00 2001
+From 69b20ea3c53f0c720d4fdeb00447cefc8c863c73 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Fri, 10 Jan 2025 13:21:06 -0500
-Subject: [PATCH] Add camel-community.version to sync-properties-maven-plugin
+Subject: Add camel-community.version to sync-properties-maven-plugin
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  .../apache/camel/maven/sync/properties/SyncPropertiesMojo.java   | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tooling/maven/sync-properties-maven-plugin/src/main/java/org/apache/camel/maven/sync/properties/SyncPropertiesMojo.java b/tooling/maven/sync-properties-maven-plugin/src/main/java/org/apache/camel/maven/sync/properties/SyncPropertiesMojo.java
-index 11699c654ba8..99fe8709183b 100644
+index 06375a07d6f7..ec82e34cd34c 100644
 --- a/tooling/maven/sync-properties-maven-plugin/src/main/java/org/apache/camel/maven/sync/properties/SyncPropertiesMojo.java
 +++ b/tooling/maven/sync-properties-maven-plugin/src/main/java/org/apache/camel/maven/sync/properties/SyncPropertiesMojo.java
-@@ -178,6 +178,7 @@ public class SyncPropertiesMojo extends AbstractMojo {
+@@ -179,6 +179,7 @@ public class SyncPropertiesMojo extends AbstractMojo {
              List invalidProperties = Stream.concat(camelParentPomXmlModel.getProperties().entrySet().stream(),
                      camelPomXmlModel.getProperties().entrySet().stream()
                              .filter(property -> !(property.getKey().equals("jdk.version"))))
@@ -20,5 +21,5 @@ index 11699c654ba8..99fe8709183b 100644
                      .map(property -> property.getKey())
                      .sorted()
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

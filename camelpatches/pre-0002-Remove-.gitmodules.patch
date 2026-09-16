@@ -1,8 +1,9 @@
-From 8f1e77d678da83297b2ebfe99b30ee7d83c01835 Mon Sep 17 00:00:00 2001
+From e1edc4406932bd030da6cb45836a448335815963 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Tue, 10 Sep 2024 13:16:51 -0400
-Subject: [PATCH] Remove .gitmodules
+Subject: Remove .gitmodules
 
+Signed-off-by: Tom Cunningham <tcunning@redhat.com>
 ---
  .gitmodules | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
@@ -12,5 +13,5 @@ diff --git a/.gitmodules b/.gitmodules
 deleted file mode 100644
 index e69de29bb2d1..000000000000
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

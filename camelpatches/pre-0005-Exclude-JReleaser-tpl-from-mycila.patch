@@ -1,0 +1,31 @@
+From b5b0c8e03527e3cdbbd0ff4f9569714e0f9a1ef4 Mon Sep 17 00:00:00 2001
+From: James Netherton <jamesnetherton@gmail.com>
+Date: Mon, 17 Aug 2026 10:40:52 +0100
+Subject: Exclude JReleaser .tpl files from mycila license plugin
+
+The camel-launcher module is disabled on this branch by
+cq-prod-maven-plugin, so its module-level mycila exclusions for .tpl
+files never apply. The parent-level license scan then picks up the
+templates and fails with failIfUnknown=true. Add the exclusion to the
+root mycila configuration.
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+---
+ pom.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pom.xml b/pom.xml
+index b112d53aa16d..3bafa0c8479d 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -447,6 +447,7 @@
+                                     <exclude>**/*.wav</exclude>
+                                     <exclude>**/*.cast</exclude>
+                                     <exclude>**/Makefile</exclude>
++                                    <exclude>**/jreleaser/**/*.tpl</exclude>
+                                 </excludes>
+                             </licenseSet>
+                         </licenseSets>
+-- 
+2.54.0 (Apple Git-157)
+

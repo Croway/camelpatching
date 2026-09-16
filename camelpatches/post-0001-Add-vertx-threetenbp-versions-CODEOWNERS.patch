@@ -1,0 +1,136 @@
+From 2a0010ca9ef4b5617ea11ccba9bf070e03bc5e06 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Wed, 16 Sep 2026 15:08:31 +0200
+Subject: Add vertx-community-version, threetenbp-version, remove dependabot,
+ add CODEOWNERS
+
+---
+ .github/CODEOWNERS                           |  1 +
+ .github/dependabot.yml                       | 58 --------------------
+ components/camel-platform-http-main/pom.xml  |  2 +-
+ components/camel-platform-http-vertx/pom.xml |  2 +-
+ parent/pom.xml                               |  2 +
+ 5 files changed, 5 insertions(+), 60 deletions(-)
+ create mode 100644 .github/CODEOWNERS
+ delete mode 100644 .github/dependabot.yml
+
+diff --git a/.github/CODEOWNERS b/.github/CODEOWNERS
+new file mode 100644
+index 000000000000..902e6ba94725
+--- /dev/null
++++ b/.github/CODEOWNERS
+@@ -0,0 +1 @@
++@jboss-fuse/camel-reviewers
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+deleted file mode 100644
+index 2aeb3e56803b..000000000000
+--- a/.github/dependabot.yml
++++ /dev/null
+@@ -1,58 +0,0 @@
+-#
+-# Licensed to the Apache Software Foundation (ASF) under one or more
+-# contributor license agreements.  See the NOTICE file distributed with
+-# this work for additional information regarding copyright ownership.
+-# The ASF licenses this file to You under the Apache License, Version 2.0
+-# (the "License"); you may not use this file except in compliance with
+-# the License.  You may obtain a copy of the License at
+-#
+-#      http://www.apache.org/licenses/LICENSE-2.0
+-#
+-# Unless required by applicable law or agreed to in writing, software
+-# distributed under the License is distributed on an "AS IS" BASIS,
+-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-# See the License for the specific language governing permissions and
+-# limitations under the License.
+-#
+-
+-version: 2
+-
+-updates:
+-  - package-ecosystem: "github-actions"
+-    directory: "/"
+-    schedule:
+-      interval: "daily"
+-  - package-ecosystem: "maven"
+-    directory: "/"
+-    schedule:
+-      interval: "daily"
+-    ignore:
+-      # Quarkus related
+-      - dependency-name: "io.vertx:*"
+-      - dependency-name: "io.smallrye:jandex:*"
+-      # Spring Boot Dependencies related
+-      - dependency-name: "org.apache.logging.log4j:*"
+-      # This is a virtual plugin which doesn't really exist
+-      - dependency-name: "org.eclipse.m2e:lifecycle-mapping"
+-      # Managed manually - gencode version must be <= the lowest runtime version across Spring Boot and Quarkus
+-      - dependency-name: "com.google.protobuf:*"
+-    groups:
+-      Micrometer:
+-        patterns: ["io.micrometer:*"]
+-      Opentelemetry:
+-        patterns: ["io.opentelemetry:*"]
+-      LangChain4j:
+-        patterns: ["dev.langchain4j:*"]
+-      Parquet:
+-        patterns: ["org.apache.parquet:*"]
+-      CometD:
+-        patterns: ["org.cometd.java:*"]
+-      Elasticsearch:
+-        patterns: ["org.elasticsearch.client:*", "co.elastic.clients:*"]
+-      Google-cloud:
+-        patterns: ["com.google.cloud:*"]
+-    open-pull-requests-limit: 20
+-  - package-ecosystem: "npm"
+-    directory: "docs"
+-    schedule:
+-       interval: "weekly"
+diff --git a/components/camel-platform-http-main/pom.xml b/components/camel-platform-http-main/pom.xml
+index 137412afbf89..e2815414c97d 100644
+--- a/components/camel-platform-http-main/pom.xml
++++ b/components/camel-platform-http-main/pom.xml
+@@ -60,7 +60,7 @@
+         <dependency>
+             <groupId>io.vertx</groupId>
+             <artifactId>vertx-auth-properties</artifactId>
+-            <version>${vertx-version}</version>
++            <version>${vertx-community-version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.vertx</groupId>
+diff --git a/components/camel-platform-http-vertx/pom.xml b/components/camel-platform-http-vertx/pom.xml
+index cea91402c255..b30f3f8c548b 100644
+--- a/components/camel-platform-http-vertx/pom.xml
++++ b/components/camel-platform-http-vertx/pom.xml
+@@ -53,7 +53,7 @@
+         <dependency>
+             <groupId>io.vertx</groupId>
+             <artifactId>vertx-web</artifactId>
+-            <version>${vertx-version}</version>
++            <version>${vertx-community-version}</version>
+         </dependency>
+ 
+         <!-- test dependencies -->
+diff --git a/parent/pom.xml b/parent/pom.xml
+index 26a423c62ac8..d28045d362dd 100644
+--- a/parent/pom.xml
++++ b/parent/pom.xml
+@@ -512,6 +512,7 @@
+         <tahu-version>1.0.21</tahu-version>
+         <tamboui-version>0.4.0</tamboui-version>
+         <testcontainers-version>2.0.5</testcontainers-version>
++        <threetenbp-version>1.7.2</threetenbp-version>
+         <thymeleaf-version>3.1.5.RELEASE</thymeleaf-version>
+         <tika-version>3.3.2</tika-version>
+         <twilio-version>12.1.1</twilio-version>
+@@ -521,6 +522,7 @@
+         <univocity-parsers-version>2.10.2</univocity-parsers-version>
+         <velocity-tools-version>3.1</velocity-tools-version>
+         <velocity-version>2.4.1</velocity-version>
++        <vertx-community-version>4.5.34</vertx-community-version>
+         <vertx-version>4.5.34</vertx-version>
+         <weaviate-client-version>6.3.0</weaviate-client-version>
+         <web3j-version>5.0.0</web3j-version>
+-- 
+2.54.0 (Apple Git-157)
+

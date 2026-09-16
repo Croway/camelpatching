@@ -1,0 +1,24 @@
+From c2b775bf09998fff8e9baba048b3f43ca0a22730 Mon Sep 17 00:00:00 2001
+From: Federico Mariani <fmariani1@ibm.com>
+Date: Mon, 31 Aug 2026 14:41:05 +0200
+Subject: Remove the non existent camel-cloud dependency
+
+---
+ .../src/main/resources/required-productized-camel-artifacts.txt  | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/product/src/main/resources/required-productized-camel-artifacts.txt b/product/src/main/resources/required-productized-camel-artifacts.txt
+index bde0de217236..e4707a547a5f 100644
+--- a/product/src/main/resources/required-productized-camel-artifacts.txt
++++ b/product/src/main/resources/required-productized-camel-artifacts.txt
+@@ -24,7 +24,6 @@ camel-browse
+ camel-cassandraql
+ camel-catalog
+ camel-cli-connector
+-camel-cloud
+ camel-cloudevents
+ camel-componentdsl
+ camel-console
+-- 
+2.54.0 (Apple Git-157)
+

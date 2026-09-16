@@ -201,11 +201,12 @@ def apply_patch(patch_file, debug=False, use_reject_mode=False):
                 # 3-way merge succeeded!
                 print_success(f"Applied {patch_file.name} (via 3-way merge)")
 
-# Set JAVA_HOME
-os.environ['JAVA_HOME'] = "/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home"
+# Set JAVA_HOME - override in the environment for a non-Homebrew JDK
+os.environ.setdefault('JAVA_HOME', "/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home")
 
 # Set truststore for PNC/Indy access
-os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + " -Djavax.net.ssl.trustStore=/Users/fmariani/.pnc-bacon/truststore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+TRUSTSTORE = os.environ.get('PNC_TRUSTSTORE', os.path.expanduser("~/.pnc-bacon/truststore.jks"))
+os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + f" -Djavax.net.ssl.trustStore={TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=changeit"
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Camel patching automation script')
@@ -222,12 +223,12 @@ debug_mode = args.debug
 use_reject = args.use_reject
 
 # Configuration
-vers = "4.21.0"
+vers = "4.22.1"
 dir_name = f"camel-{vers}-branch"
 patchdir = "camelpatches"
 
 upstreambranch = f"camel-{vers}"
-currentprodbranch = "camel-4.19.0-branch"
+currentprodbranch = "camel-4.22.0-branch"
 prodlocation = "prodlocation"
 
 # Print welcome banner
