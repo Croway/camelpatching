@@ -1,0 +1,26 @@
+From c1fa189cf121002de328fd7b02134d72e156ed79 Mon Sep 17 00:00:00 2001
+From: Croway <federico.mariani.1990@gmail.com>
+Date: Mon, 24 Aug 2026 13:34:23 +0200
+Subject: RHBAC-70 - Kamelets Catalog: Change metadata to reflect Red Hat
+ catalog
+
+---
+ .../org/apache/camel/kamelets/catalog/KameletsCatalogTest.java  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/library/camel-kamelets-catalog/src/test/java/org/apache/camel/kamelets/catalog/KameletsCatalogTest.java b/library/camel-kamelets-catalog/src/test/java/org/apache/camel/kamelets/catalog/KameletsCatalogTest.java
+index aa1a67f65..b685bbf4b 100644
+--- a/library/camel-kamelets-catalog/src/test/java/org/apache/camel/kamelets/catalog/KameletsCatalogTest.java
++++ b/library/camel-kamelets-catalog/src/test/java/org/apache/camel/kamelets/catalog/KameletsCatalogTest.java
+@@ -121,7 +121,7 @@ public class KameletsCatalogTest {
+     void testGetKameletsByNamespace() throws Exception {
+         List<Kamelet> c = catalog.getKameletsByNamespace("AWS");
+         assertFalse(c.isEmpty());
+-        assertEquals(31, c.size());
++        assertEquals(19, c.size());
+         c = catalog.getKameletsByGroups("Not-existing-group");
+         assertTrue(c.isEmpty());
+     }
+-- 
+2.54.0 (Apple Git-157)
+

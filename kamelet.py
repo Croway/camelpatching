@@ -205,7 +205,8 @@ def apply_patch(patch_file, debug=False, use_reject_mode=False):
 os.environ['JAVA_HOME'] = "/Users/fmariani/.sdkman/candidates/java/17.0.17-tem"
 
 # Set truststore for PNC/Indy access
-os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + " -Djavax.net.ssl.trustStore=/Users/fmariani/.pnc-bacon/truststore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+TRUSTSTORE = os.environ.get('PNC_TRUSTSTORE', os.path.expanduser("~/.pnc-bacon/truststore.jks"))
+os.environ['MAVEN_OPTS'] = os.environ.get('MAVEN_OPTS', '') + f" -Djavax.net.ssl.trustStore={TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=changeit"
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Camel Kamelets patching automation script')
@@ -222,11 +223,11 @@ debug_mode = args.debug
 use_reject = args.use_reject
 
 # Configuration
-vers = "4.21.0"
+vers = "4.22.1"
 dir_name = f"camel-kamelets-{vers}-branch"
 patchdir = "kameletpatches"
 
-currentprodbranch = "camel-kamelets-4.19.0-branch"
+currentprodbranch = "camel-kamelets-4.22.0-branch"
 prodlocation = "kameletprodlocation"
 
 # Print welcome banner
@@ -257,8 +258,15 @@ run_command(["git", "fetch", "upstream", "--tags"], "Fetching upstream tags")
 
 time.sleep(3)
 
-run_command(["git", "checkout", "-b", dir_name, f"v{vers}"],
-            f"Creating branch {dir_name} from tag v{vers}")
+# v{vers} is only tagged once the release is out; fall back to the upstream
+# maintenance branch so the product branch can be built before then.
+upstreamref = os.environ.get("KAMELET_UPSTREAM_REF", f"v{vers}")
+if subprocess.run(["git", "rev-parse", "--verify", "--quiet", upstreamref],
+                  capture_output=True).returncode != 0:
+    upstreamref = f"upstream/{vers.rsplit('.', 1)[0]}.x"
+    print_warning(f"Tag v{vers} does not exist yet - branching from {upstreamref}")
+run_command(["git", "checkout", "-b", dir_name, upstreamref],
+            f"Creating branch {dir_name} from {upstreamref}")
 
 time.sleep(3)
 
@@ -343,17 +351,20 @@ run_command([
 
 # Update provider metadata
 print_info("Updating provider metadata from Apache to Red Hat")
-console.print("  [dim]→ Running gsed to replace provider metadata[/dim]")
-result = subprocess.run([
-    "gsed", "-i", "-e",
-    's/camel.apache.org\\/provider: "Apache Software Foundation"/camel.apache.org\\/provider: "Red Hat"/g',
-    "$(find . -type f)"
-], shell=True, capture_output=True, text=True)
-
-if result.returncode == 0:
-    print_success("Provider metadata updated")
+APACHE_PROVIDER = 'camel.apache.org/provider: "Apache Software Foundation"'
+REDHAT_PROVIDER = 'camel.apache.org/provider: "Red Hat"'
+changed = 0
+for path in Path(".").rglob("*.yaml"):
+    if ".git/" in str(path):
+        continue
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if APACHE_PROVIDER in text:
+        path.write_text(text.replace(APACHE_PROVIDER, REDHAT_PROVIDER), encoding="utf-8")
+        changed += 1
+if changed:
+    print_success(f"Provider metadata updated in {changed} files")
 else:
-    print_warning("gsed command may have failed - check if gsed is installed")
+    print_warning("No Apache provider metadata found - nothing to update")
 
 run_command(["git", "commit", "-a", "-m", "RHBAC-70 - Kamelets Catalog: Change metadata to reflect Red Hat catalog"],
             "Committing metadata changes")

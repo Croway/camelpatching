@@ -1,8 +1,9 @@
-From ea70a651444ac93111c5e9b72f11efe4b28f0b7f Mon Sep 17 00:00:00 2001
+From 4ea392c3311ec261859aeba6f6834c7f809cbc2d Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
 Date: Thu, 26 Sep 2024 11:12:02 -0400
-Subject: [PATCH] Remove .gitmodules
+Subject: Remove .gitmodules
 
+Signed-off-by: Croway <federico.mariani.1990@gmail.com>
 ---
  .gitmodules | 6 ------
  1 file changed, 6 deletions(-)
@@ -10,7 +11,7 @@ Subject: [PATCH] Remove .gitmodules
 
 diff --git a/.gitmodules b/.gitmodules
 deleted file mode 100644
-index 3d953ffe..00000000
+index 3d953ffe8..000000000
 --- a/.gitmodules
 +++ /dev/null
 @@ -1,6 +0,0 @@
@@ -21,5 +22,5 @@ index 3d953ffe..00000000
 -	path = .github/actions/changelog
 -	url = https://github.com/charmixer/auto-changelog-action.git
 -- 
-2.46.0
+2.54.0 (Apple Git-157)
 

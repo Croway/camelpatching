@@ -1,15 +1,18 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 48339eb6e683b1d8647fcfc082d2200ce5c9aee5 Mon Sep 17 00:00:00 2001
 From: Tom Cunningham <tcunning@redhat.com>
-Date: Sun, 30 Mar 2026 10:00:00 -0400
-Subject: [PATCH] Add dependency management entries for camel version
+Date: Mon, 30 Mar 2026 10:00:00 -0400
+Subject: Add dependency management entries for camel version
 
 ---
+ pom.xml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
 diff --git a/pom.xml b/pom.xml
-index 04395a2a7..11234b790 100644
+index a5424890a..aa2b24fd7 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -83,6 +83,23 @@
-         <version.com.databricks.databricks-jdbc>3.0.7</version.com.databricks.databricks-jdbc>
+@@ -94,6 +94,23 @@
+         <version.com.databricks.databricks-jdbc>3.4.2</version.com.databricks.databricks-jdbc>
      </properties>
  
 +    <dependencyManagement>
@@ -32,3 +35,6 @@ index 04395a2a7..11234b790 100644
      <developers>
          <developer>
              <name>The Apache Camel Team</name>
+-- 
+2.54.0 (Apple Git-157)
+
